@@ -1,0 +1,23 @@
+{% extends "base.html" %}
+
+{% block title %}
+    Bosh Sahifa
+{% endblock %}
+
+{% block content %}
+    <div class="container mt-5">
+        <h2 class="mb-4">Projects</h2>
+        <div class="card-deck">
+            {% for project in projects %}
+            <div class="card mb-4">
+                <img src="{{ project.img.url }}" class="card-img-top" alt="{{ project.name }}">
+                <div class="card-body">
+                    <h5 class="card-title">{{ project.name }}</h5>
+                    <a href="https://github.com/Diyorbektuit" class="btn btn-primary">Github</a>
+                    <a href="{% url 'app:project' pk=project.pk %}" class="btn btn-secondary">Read more</a>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+{% endblock %}
