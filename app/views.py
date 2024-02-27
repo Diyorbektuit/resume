@@ -1,7 +1,22 @@
-from django.shortcuts import render
 from .models import Project
 from django.views import generic
-# Create your views here.
+from django.shortcuts import render, redirect
+from .forms import ContactForm
+from django.contrib import messages
+from django.http import HttpResponse
+
+
+def contacts(request):
+    if request.method == 'POST':
+        form = ContactForm(request.POST)
+        if form.is_valid():
+            form.save()
+            return HttpResponse("Xabaringiz jo'natildi.Rahmat!")
+    else:
+        form = ContactForm()
+    return render(request, 'contacts.html', {'form': form})
+
+
 
 
 def home(request):
@@ -10,10 +25,6 @@ def home(request):
 
 def education(request):
     return render(request, 'education.html')
-
-
-def contacts(request):
-    return render(request, 'contacts.html')
 
 
 class ProjectListView(generic.ListView):
